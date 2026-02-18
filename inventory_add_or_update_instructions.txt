@@ -1,0 +1,92 @@
+Goal: scan a QR code -> opens a webpage -> fills in the respective fields -> click save -> automatically updates sheet live.
+
+1. The QR code opens a link, but he link has to show a form, accept the input, write it into a sheet. Therefore, we need to build a web app. Web app (FastAPI) would write the values to the google sheet.
+
+2. Therefore, we created a web server app (FastAPI). All the details for this are mentioned in the python file main.py. Inside main.py, th eline app = FastAPI() creates the web app.
+
+Example:
+
+@app.get("/") → homepage
+
+@app.get("/new") → new entry form
+
+@app.get("/edit") → pick an existing AssetID
+
+@app.post(...) → save data to the sheet
+
+3. We made the pages people click, using HTML templates inside a folder called templates/:
+
+start.html
+→ shows New or Edit
+
+edit_pick.html
+→ lets you pick an AssetID (later we made it searchable)
+
+form.html
+→ the actual form with all your columns
+
+FastAPI serves these pages.
+
+4. We then connected the web app to Google Sheets. To let python edit a Google Sheet, we need Google permission.
+(i)  Step 1: Create a google cloud project : https://console.cloud.google.com/
+                 Create a new project, and enable google sheets and google drive API.
+
+     Step 2: Enable APIs
+                 Inside your project:
+                 Go to: APIs & Services → Library
+                 Enable: Sheets API = read/write spreadsheet, 
+                 Drive API = permission access to open by ID
+
+     Step 3: Create Service Account
+                Go to: APIs & Services → Credentials
+                Click: Create Credentials → Service Account
+                Give it a name
+                Create
+                No special permissions needed here.
+
+     Step 4: Create JSON Key
+                 Inside the Service Account: Go to “Keys” tab
+                 Click “Add Key”
+                 Choose JSON
+                 Download
+                 This file is your robot identity.
+
+It contains: client_email, private_key, project_id. This is what your server uses to authenticate.
+
+     Step 5: Share Your Google Sheet
+                Open your Google Sheet.
+                Click Share.
+                Paste the email found inside your JSON file:
+
+                A .env file is created which stores the values of the variables SPREADSHEET_ID and  		        GOOGLE_APPLICATION_CREDENTIALS, instead of typing it every time.
+               This is then loaded into Python.
+
+   Step 6: Create a local folder (say, qr-sheet-app) on your computer.
+               Copy main.py, templates/ (html files), .env, requirements.txt and all required files into 		       this folder. Copy the folder path. Let us say, it is C:\Users\14129\Documents\qr-sheet-		       app
+
+
+1. Open powershell, and go to your project. Type cd "C:\Users\14129\Documents\qr-sheet-app"
+2. Install dependents. Type pip install -r requirements.txt pip install python-dotenv
+3. Run server: uvicorn main:app --host 127.0.0.1 --port 8001 --reload --access-log
+
+The server is just a python program. When the link is opened, it receives the request, runs the python function, and sends back the html page. 
+
+
+The link is accessible to be updated only by people with a cmu Andrew id. To do this, we added the allowed domain to andrew.cmu.edu. 
+
+
+Summary of steps to operate: 
+1. Scan the QR code. It takes you to the main page.
+2. Once you click add entry/existing entry on the page, it directs you to the login page. You have to enter your cmu id, else it wouldn't let you proceed.
+3. Add a new entry or edit an existing entry by typing keywords int he search bar.
+4. The fields corresponding to Primary Element, Description (Alloy), Upper Size (μm), Manufacturer and Date received are fixed. The other fields can be updated. Click Save/ back to home page to add/edit further entries.
+
+The link to google sheets: https://docs.google.com/spreadsheets/d/1BCa0I47z-51xGdwrpNFZab8s1gWLyBVOw0GgoyB-JYM/edit?usp=drive_link
+  
+
+
+
+
+
+
+
