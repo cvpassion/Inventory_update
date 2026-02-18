@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{{ "New Entry" if mode=="new" else "Edit Entry" }}</title>
+  <style>
+    body { font-family: Arial; padding: 16px; max-width: 650px; margin: auto; }
+    label { display:block; margin-top: 12px; font-weight: bold; }
+    input { width:100%; padding:10px; margin-top:6px; font-size:16px; }
+    button { margin-top:20px; padding:12px; width:100%; font-size:16px; }
+    .box { background:#f3f3f3; padding:10px; border:1px solid #ddd; margin-bottom:12px; }
+    .ok { background:#eaffea; padding:10px; border:1px solid #b5e3b5; margin-bottom:12px; }
+  </style>
+</head>
+<body>
+
+{% if request.query_params.get("ok") %}
+  <div class="ok">Saved ✅</div>
+{% endif %}
+
+<h3>{{ "New Entry" if mode=="new" else "Edit Entry" }}</h3>
+
+{% if mode=="edit" %}
+  <div class="box">AssetID: <strong>{{ asset_id }}</strong></div>
+{% else %}
+  <div class="box">AssetID will be generated from the fields (joined with underscores).</div>
+{% endif %}
+
+<form method="post" action="{{ '/u/new' if mode=='new' else '/u/' ~ asset_id }}">
+
+  <label>Primary Element</label>
+{% if mode == "edit" %}
+  <div style="padding:8px;background:#f3f3f3;border:1px solid #ccc;">
+    {{ data.primary_element }}
+  </div>
+{% else %}
+  <input name="primary_element">
+{% endif %}
+
+<label>Description (Alloy)</label>
+{% if mode == "edit" %}
+  <div style="padding:8px;background:#f3f3f3;border:1px solid #ccc;">
+    {{ data.description_alloy }}
+  </div>
+{% else %}
+  <input name="description_alloy">
+{% endif %}
+
+<label>Upper Size (μm)</label>
+{% if mode == "edit" %}
+  <div style="padding:8px;background:#f3f3f3;border:1px solid #ccc;">
+    {{ data.upper_size_um }}
+  </div>
+{% else %}
+  <input name="upper_size_um">
+{% endif %}
+
+<label>Manufacturer</label>
+{% if mode == "edit" %}
+  <div style="padding:8px;background:#f3f3f3;border:1px solid #ccc;">
+    {{ data.manufacturer }}
+  </div>
+{% else %}
+  <input name="manufacturer">
+{% endif %}
+
+
+<label>Date received</label>
+{% if mode == "edit" %}
+  <div style="padding:8px;background:#f3f3f3;border:1px solid #ccc;">
+    {{ data.date_received }}
+  </div>
+{% else %}
+  <input name="date_received">
+{% endif %}
+
+
+
+<label>Number of uses</label>
+<input name="number_of_uses" value="{{ data.number_of_uses if mode=='edit' else '' }}">
+
+<label>Condition identifier</label>
+<input name="condition_identifier" value="{{ data.condition_identifier if mode=='edit' else '' }}">
+
+<label>Print date for recycling</label>
+<input name="print_date_recycling" value="{{ data.print_date_recycling if mode=='edit' else '' }}">
+
+<label>Last Updated By</label>
+<input name="updated_by" value="{{ data.updated_by if mode=='edit' else '' }}">
+
+ <button type="submit">Save</button>
+
+<hr style="margin:18px 0;">
+
+<button type="button" onclick="window.location.href='/'">Back to Home</button>
+
+
+</form>
+
+</body>
+</html>

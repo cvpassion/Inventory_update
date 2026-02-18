@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+<body>
+<h3>Select AssetID (type to search)</h3>
+
+<form action="/u/" method="get">
+  <input name="asset_id" list="assetids" placeholder="Type e.g. 316 or Ti" required>
+
+  <datalist id="assetids">
+    {% for a in asset_ids %}
+      <option value="{{ a }}"></option>
+    {% endfor %}
+  </datalist>
+
+  <button type="submit">Continue</button>
+</form>
+
+</body>
+</html>
+
