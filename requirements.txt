@@ -4,3 +4,7 @@ gspread
 google-auth
 python-multipart
 jinja2
+python-dotenv
+authlib
+itsdangerous
+httpx
