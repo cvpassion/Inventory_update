@@ -72,7 +72,7 @@ It contains: client_email, private_key, project_id. This is what your server use
 The server is just a python program. When the link is opened, it receives the request, runs the python function, and sends back the html page. 
 
 
-The link is accessible to be updated only by people with a cmu Andrew id. To do this, we added the allowed domain to andrew.cmu.edu. 
+The link is accessible to be updated only by people with a cmu Andrew id. To do this, the allowed domain was restricted to andrew.cmu.edu. A public url was deployed using Render.
 
 
 Summary of steps to operate: 
