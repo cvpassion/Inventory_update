@@ -81,7 +81,7 @@ Summary of steps to operate:
 3. Add a new entry or edit an existing entry by typing keywords int he search bar.
 4. The fields corresponding to Primary Element, Description (Alloy), Upper Size (μm), Manufacturer and Date received are fixed. The other fields can be updated. Click Save/ back to home page to add/edit further entries.
 
-The link to google sheets: https://docs.google.com/spreadsheets/d/1BCa0I47z-51xGdwrpNFZab8s1gWLyBVOw0GgoyB-JYM/edit?usp=drive_link
+
   
 
 
