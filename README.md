@@ -1,5 +1,5 @@
 # Inventory_update
-This repository is for updating specifics of powder usage through a webpage, populating the updates in the google sheet data, live. Upon scanning the QR code, the user is directed to a webpage, where they can update the variables related to the powder inventory. 
+This repository is for the live update of the powder inventory through a webpage, populating the updates in the google sheet data. Upon scanning the QR code, the user is directed to a webpage, where they can update the variables related to the powder inventory. 
 
 Summary of steps to operate: 
 1. Scan the QR code listed on main page as "qr.png". It takes you to the webpage. It might takes a few seconds,utp a minute for the webpage to load, depending on the inactivity status.
