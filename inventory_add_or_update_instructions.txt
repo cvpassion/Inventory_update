@@ -1,6 +1,6 @@
 Goal: scan a QR code -> opens a webpage -> fills in the respective fields -> click save -> automatically updates sheet live.
 
-1. The QR code opens a link, but he link has to show a form, accept the input, write it into a sheet. Therefore, we need to build a web app. Web app (FastAPI) would write the values to the google sheet.
+1. The QR code opens a link, but and link opens a form, accepts the input, and writes it into a sheet. We need to build a web app for this purpose. Web app (FastAPI) would write the values to the google sheet.
 
 2. Therefore, we created a web server app (FastAPI). All the details for this are mentioned in the python file main.py. Inside main.py, th eline app = FastAPI() creates the web app.
 
