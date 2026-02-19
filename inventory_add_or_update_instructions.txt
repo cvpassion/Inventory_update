@@ -66,6 +66,8 @@ The server is just a python program. When the link is opened, it receives the re
 The link is accessible to be updated only by people with a cmu Andrew id. To do this, the allowed domain was restricted to andrew.cmu.edu. A public url was deployed using Render.
 
 Acknowledgements:
+Credits for the idea to develop the webpage, and ease of managing powder inventory in the lab : Liza Lepczyk Allison and Daniel Sinclair 
+Credits for the naming convention, and formatting entries on webpage : Daniel Sinclair
 Functional logic to develop the webpage, and coding assistance was provided by ChatGPT (OpenAI, 2025).
 
 
