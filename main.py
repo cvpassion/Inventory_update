@@ -1,4 +1,4 @@
-
+from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -17,6 +17,7 @@ from authlib.integrations.starlette_client import OAuth, OAuthError
 
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
