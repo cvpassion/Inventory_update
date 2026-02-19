@@ -1,8 +1,8 @@
-Goal: scan a QR code -> opens a webpage -> fills in the respective fields -> click save -> automatically updates sheet live.
+Goal: scan a QR code -> open a webpage -> fill in the respective fields -> click save -> automatically updates inventory sheet live.
 
-1. The QR code opens a link, but and link opens a form, accepts the input, and writes it into a sheet. We need to build a web app for this purpose. Web app (FastAPI) would write the values to the google sheet.
+1. The QR code opens a link, which opens a form, accepts the input, and writes it into a sheet. We need to build a web app for this purpose. Web app (FastAPI) would write the values to the google sheet.
 
-2. Therefore, we created a web server app (FastAPI). All the details for this are mentioned in the python file main.py. Inside main.py, th eline app = FastAPI() creates the web app.
+2. Therefore, a web server app (FastAPI) was created. All the details for this are mentioned in the python file main.py. Inside main.py, the line app = FastAPI() creates the web app.
 
 Example:
 
@@ -14,20 +14,13 @@ Example:
 
 @app.post(...) → save data to the sheet
 
-3. We made the pages people click, using HTML templates inside a folder called templates/:
-
-start.html
-→ shows New or Edit
-
-edit_pick.html
-→ lets you pick an AssetID (later we made it searchable)
-
-form.html
-→ the actual form with all your columns
-
+3. The webpage that people would click was made using HTML templates inside a folder called templates/:
+start.html, which shows New or Edit
+edit_pick.html, that lets you pick an AssetID (searchable using keywords)
+form.html, which is the actual form with all the columns
 FastAPI serves these pages.
 
-4. We then connected the web app to Google Sheets. To let python edit a Google Sheet, we need Google permission.
+4. The web app was then connected to the Google Sheets. To let python edit a Google Sheet, we need Google permission.
 (i)  Step 1: Create a google cloud project : https://console.cloud.google.com/
                  Create a new project, and enable google sheets and google drive API.
 
@@ -56,30 +49,25 @@ It contains: client_email, private_key, project_id. This is what your server use
      Step 5: Share Your Google Sheet
                 Open your Google Sheet.
                 Click Share.
-                Paste the email found inside your JSON file:
+                Paste the email found inside your JSON file.
 
-                A .env file is created which stores the values of the variables SPREADSHEET_ID and  		        GOOGLE_APPLICATION_CREDENTIALS, instead of typing it every time.
-               This is then loaded into Python.
+ A .env file is created which stores the values of the variables "SPREADSHEET_ID" and "GOOGLE_APPLICATION_CREDENTIALS", instead of typing it every time. This is then loaded into   Python.
 
    Step 6: Create a local folder (say, qr-sheet-app) on your computer.
-               Copy main.py, templates/ (html files), .env, requirements.txt and all required files into 		       this folder. Copy the folder path. Let us say, it is C:\Users\14129\Documents\qr-sheet-		       app
+Copy main.py, templates/ (html files), .env, requirements.txt and all required files into this folder. Copy the folder path. Let us say, it is C:\Users\14129\Documents\qr-sheet-app
 
 
 1. Open powershell, and go to your project. Type cd "C:\Users\14129\Documents\qr-sheet-app"
 2. Install dependents. Type pip install -r requirements.txt pip install python-dotenv
-3. Run server: uvicorn main:app --host 127.0.0.1 --port 8001 --reload --access-log
+3. Run server: uvicorn main:app --host 127.0.0.1 --port 8001 --reload --access-log. Note that this server is only for the local host, which has further been updated to the public server generated through Render.
 
 The server is just a python program. When the link is opened, it receives the request, runs the python function, and sends back the html page. 
 
-
 The link is accessible to be updated only by people with a cmu Andrew id. To do this, the allowed domain was restricted to andrew.cmu.edu. A public url was deployed using Render.
 
+Acknowledgements:
+Functional logic to develop the webpage, and coding assistance was provided by ChatGPT (OpenAI, 2025).
 
-Summary of steps to operate: 
-1. Scan the QR code. It takes you to the main page.
-2. Once you click add entry/existing entry on the page, it directs you to the login page. You have to enter your cmu id, else it wouldn't let you proceed.
-3. Add a new entry or edit an existing entry by typing keywords int he search bar.
-4. The fields corresponding to Primary Element, Description (Alloy), Upper Size (μm), Manufacturer and Date received are fixed. The other fields can be updated. Click Save/ back to home page to add/edit further entries.
 
 
   
