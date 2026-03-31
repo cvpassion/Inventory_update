@@ -3,9 +3,8 @@ uvicorn
 gspread
 google-auth
 python-multipart
-jinja2
+Jinja2==3.0.3
 python-dotenv
 authlib
 itsdangerous
 httpx
-Jinja2==3.1.4
